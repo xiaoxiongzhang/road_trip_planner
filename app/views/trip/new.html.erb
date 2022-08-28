@@ -1,0 +1,78 @@
+<h1>Create Trip</h1>
+
+<div class="row">
+  <div class="col-sm-12">
+<!--    <button type="button" class="btn btn-primary"></button>-->
+    <%= form_for @trip, url: "/trip", method: "post" do |f| %>
+      <div class="form-group">
+        <%#= f.hidden_field :destination_ids, nil %>
+        <input type="text" hidden name="destination_ids">
+      </div>
+      <div class="form-group">
+        <%= f.text_field :name,  class: "form-control", placeholder: "trip name" %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :trip_date, class: "form-control", placeholder: "trip date, YYYY-mm-dd" %>
+      </div>
+      <%= f.submit "Create", class: "btn btn-primary", style: "margin-right: 15px" %>
+
+  <% end %>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">State</th>
+        <th scope="col">City</th>
+        <th scope="col">Type</th>
+        <th scope="col">Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @destinations.each do |destination| %>
+        <tr>
+          <th scope="row">
+            <input id="js-all-checkbox" type="checkbox" onclick="select_d(this.checked, <%= destination.id %>)">
+          </th>
+          <td><%= destination.name %></td>
+          <td><%= destination.state %></td>
+          <td><%= destination.city %></td>
+          <td><%= destination.destination_type %></td>
+          <td><%= destination.description %></td>
+        </tr>
+      <% end -%>
+
+      </tbody>
+    </table>
+    <%= will_paginate @destinations, :previous_label  => 'Pre', :next_label => 'Next' %>
+  </div>
+</div>
+
+<%= content_for :javascripts do %>
+  <script type="text/javascript">
+    let selected = new Set()
+
+    function select_d(checked, d_id) {
+        if (checked === true) {
+            selected.add(d_id)
+        } else {
+            selected.delete(d_id)
+        }
+        console.log(selected)
+    }
+
+    function setToStr(s){
+        arr = Array.from(s)
+        return arr.join(',')
+    }
+
+    $('.create_trip').on('ajax:success', function(event, data) {
+        if (data.status === 'ok') {
+            window.location.href = data.msg.redirect_url;
+        } else {
+            alert(data.msg);
+        }
+    })
+
+  </script>
+<% end -%>

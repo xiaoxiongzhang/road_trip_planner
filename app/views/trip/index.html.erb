@@ -1,0 +1,43 @@
+<h1>My Trips</h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <button type="button" class="btn btn-primary" onclick="createTrip()">Create Trip</button>
+
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">CreateTime</th>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Operation</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @trips.each do |trip| %>
+        <tr>
+          <td><%= trip.updated_at %></td>
+          <td><%= trip.name %></td>
+          <td><%= trip.trip_type %></td>
+          <td>
+            <%= link_to "detail", trip_path(trip.id), method: 'get' %>
+            <%= link_to "edit", edit_trip_path(trip.id), method: 'get' %>
+            <%= link_to "delete", trip_path(trip.id), method: 'delete' %>
+          </td>
+        </tr>
+      <% end -%>
+
+      </tbody>
+    </table>
+    <%= will_paginate @trips, :previous_label  => 'Pre', :next_label => 'Next' %>
+  </div>
+</div>
+
+<%= content_for :javascripts do %>
+  <script type="text/javascript">
+    function createTrip() {
+        console.log("<%= new_trip_url %>")
+        window.location.href = "<%= new_trip_url %>";
+    }
+  </script>
+<% end -%>

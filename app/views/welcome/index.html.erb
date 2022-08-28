@@ -1,0 +1,31 @@
+<% if @user %>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Welcome, <%= @user.name %></h1>
+      <p>Let's get started on our travel plan!</p>
+      <p><a class="btn btn-primary btn-lg" href="/trip" role="button">Trips Management</a></p>
+    </div>
+  </div>
+<% else %>
+  <div class="jumbotron">
+    <div class="container">
+      <h2>Road Trip Planner for Museums</h2>
+      <h3>Basic Functions</h3>
+      <div data-line-wrapper="true" dir="auto">
+        <li>A user can go to the web site, create an account with his email address and set a password.</li>
+        <li>After the account is created, he can go to the trip list page and the list should be empty.</li>
+        <li>There should be a create a trip button, when clicked upon, it will go to trip creation page.</li>
+        <li>
+          The page shows the art museums in California, and there should be multiple checkbox in front of it.
+          User can select 1 or multiple of them, and enter the name and date of the trip (the date should be sometime in
+          the future),then click on “Save the Trip” button. This will create a trip that visits the checked museums
+        </li>
+      </div>
+    </div>
+  </div>
+<% end -%>
+<%= content_for :javascripts do %>
+  <script type="text/javascript">
+      var pageTitle = "Home";
+  </script>
+<% end -%>
