@@ -22,7 +22,7 @@ class TripController < ApplicationController
       return
     end
     begin
-      if (Time.parse(params[:trip_date]) - Time.now) < 0
+      if (Time.parse(params[:trip][:trip_date].to_s) - Time.now) < 0
         flash[:notice] = "the Trip Date must be after now"
         @destinations = Destination.page(params[:page] || 1).per_page(params[:per_page] || 10)
         @trip = Trip.new
@@ -30,7 +30,7 @@ class TripController < ApplicationController
         return
       end
     rescue
-      flash[:notice] = "the Trip Date Error"
+      flash[:notice] = "the Trip Date Error: #{$!}"
       @destinations = Destination.page(params[:page] || 1).per_page(params[:per_page] || 10)
       @trip = Trip.new
       render action: :new
@@ -108,6 +108,7 @@ class TripController < ApplicationController
     destinations.each do |des|
       if not city
         city = des.city
+        t_type = 'day trip'
       elsif des.city != city or n >= 2
         t_type = 'multiple day trip'
         break
