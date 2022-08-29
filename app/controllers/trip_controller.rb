@@ -21,6 +21,21 @@ class TripController < ApplicationController
       render action: :new
       return
     end
+    begin
+      if (Time.parse(params[:trip_date]) - Time.now) < 0
+        flash[:notice] = "the Trip Date must be after now"
+        @destinations = Destination.page(params[:page] || 1).per_page(params[:per_page] || 10)
+        @trip = Trip.new
+        render action: :new
+        return
+      end
+    rescue
+      flash[:notice] = "the Trip Date Error"
+      @destinations = Destination.page(params[:page] || 1).per_page(params[:per_page] || 10)
+      @trip = Trip.new
+      render action: :new
+      return
+    end
 
     @trip = current_user.trips.new(trip_attrs)
     destination_ids_array = destination_ids.split(',')
@@ -88,7 +103,7 @@ class TripController < ApplicationController
 
     destinations = Destination.where(["id in (?)", ids])
     city = nil
-    t_type = 'day trip'
+    t_type = @trip.trip_type
     n = 0
     destinations.each do |des|
       if not city
