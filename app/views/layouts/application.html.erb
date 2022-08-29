@@ -28,7 +28,8 @@
           </li>
 
           <% if logged_in? %>
-            <li><%= link_to "Trips", session_path(session[:user_id]), method: 'get' %></li>
+            <li><%= link_to "Trips", "/trip", method: 'get' %></li>
+            <li><%= link_to "Museums", "/destination", method: 'get' %></li>
             <li><%= link_to "#{current_user.name}, logout", session_path(session[:user_id]), method: 'delete' %></li>
           <% else %>
             <li><%= link_to "login", new_session_path %></li>

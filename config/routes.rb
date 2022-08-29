@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "welcome#index"
 
+  get "/destination/list", to: "destination#list"
+  get "/destination/search", to: "destination#search"
+
   resources :session
   resources :user
   resources :trip

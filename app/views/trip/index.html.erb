@@ -20,9 +20,8 @@
           <td><%= trip.name %></td>
           <td><%= trip.trip_type %></td>
           <td>
-            <%= link_to "detail", trip_path(trip.id), method: 'get' %>
-            <%= link_to "edit", edit_trip_path(trip.id), method: 'get' %>
-            <%= link_to "delete", trip_path(trip.id), method: 'delete' %>
+            <%= link_to "Edit", trip_path(trip.id), method: 'get' %>
+            <%= link_to "Delete", trip_path(trip.id), method: 'delete' %>
           </td>
         </tr>
       <% end -%>

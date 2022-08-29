@@ -2,10 +2,15 @@
 
 <div class="row">
   <div class="col-sm-12">
+
+    <form action="<%= destination_search_url %>" method="get">
+      Museum Name: <input type="text" name="name" value="<%= params[:name] %>" />
+      <input type="submit" name="search" value="search">
+    </form>
+
     <table class="table table-hover">
       <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">State</th>
         <th scope="col">City</th>
@@ -16,7 +21,6 @@
       <tbody>
       <% @destinations.each do |destination| %>
         <tr>
-          <th scope="row"><input id="js-all-checkbox" type="checkbox" onclick="select(this)"></th>
           <td><%= destination.name %></td>
           <td><%= destination.state %></td>
           <td><%= destination.city %></td>
@@ -31,11 +35,3 @@
   </div>
 </div>
 
-<%#= content_for :javascripts do %>
-<!--  <script type="text/javascript">-->
-<!--    let selected = []-->
-<!--    function select(dom) {-->
-
-<!--    }-->
-<!--  </script>-->
-<%# end -%>

@@ -9,5 +9,11 @@ class CreateDestinations < ActiveRecord::Migration[7.0]
 
       t.timestamps null: false
     end
+
+    create_table :trips_destinations do |t|
+      t.integer :trip_id
+      t.integer :destination_id
+    end
+
   end
 end
