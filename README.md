@@ -1,24 +1,46 @@
-# README
+# Road Trip Planner
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## description
+- see: https://chilun.feishu.cn/docx/doxcnAlDNl6OBZOE0TJDtrhhVtf
 
-Things you may want to cover:
+## environment
+- ruby (>3.0.4)
+- rails (~7.0.3.1)
+- mysql (>5.7)
 
-* Ruby version
+## setup instruction
+- local develop setup instruction
+  ~~~ 
+  rails db:create
+  rails db:migrate
+  rails db:seed
+  rails server -b 0.0.0.0
+  
+## functions instruction
+- Models definition
+  - file path: {root_path}/db/migrate/*
+  - models
+    - users
+    - trips
+    - destinations
+    - destinations_trips
+- Data scrapper
+  - code path: {root_path}/db/seeds.rb
+  - instruction:
+    ~~~
+    Get museums and parse HTML from https://chilun.feishu.cn/docx/doxcnAlDNl6OBZOE0TJDtrhhVtf
+    use gem 'mechanize'
+    
+- Controllers&Views instruction
+  - create trip
+    - C: trip#create
+    - V: app/views/trip/new.html.erb
+  - shows art museum list
+    - C: destination#index
+    - V: app/views/destination/index.html.erb
+  - search filter museums
+    - C: destination#search
+    - V: app/views/destination/index.html.erb
+  - .etc
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
