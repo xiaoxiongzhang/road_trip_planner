@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 
-  validates :name, presence: { message: "用户名不能为空" }
-  validates :email, uniqueness: { message: "email已存在" }
+  validates :name, presence: { message: "username cant be null!" }
+  validates :email, uniqueness: { message: "the email has registered, please goto login or take another email address!" }
 
   has_many :trips
 
